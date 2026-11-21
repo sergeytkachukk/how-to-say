@@ -1,0 +1,100 @@
+{
+  "languages": [
+    { "slug": "english", "name": "English", "code": "en" },
+    { "slug": "italian", "name": "Italian", "code": "it" },
+    { "slug": "ukrainian", "name": "Ukrainian", "code": "uk" },
+    { "slug": "german", "name": "German", "code": "de" }
+  ],
+  "phrases": [
+    {
+      "slug": "hello",
+      "translations": {
+        "english": "Hello",
+        "italian": "Ciao",
+        "ukrainian": "Привіт",
+        "german": "Hallo"
+      }
+    },
+    {
+      "slug": "goodbye",
+      "translations": {
+        "english": "Goodbye",
+        "italian": "Arrivederci",
+        "ukrainian": "До побачення",
+        "german": "Auf Wiedersehen"
+      }
+    },
+    {
+      "slug": "thank-you",
+      "translations": {
+        "english": "Thank you",
+        "italian": "Grazie",
+        "ukrainian": "Дякую",
+        "german": "Danke"
+      }
+    },
+    {
+      "slug": "please",
+      "translations": {
+        "english": "Please",
+        "italian": "Per favore",
+        "ukrainian": "Будь ласка",
+        "german": "Bitte"
+      }
+    },
+    {
+      "slug": "sorry",
+      "translations": {
+        "english": "I am sorry",
+        "italian": "Mi dispiace",
+        "ukrainian": "Мені шкода",
+        "german": "Es tut mir leid"
+      }
+    },
+    {
+      "slug": "good-morning",
+      "translations": {
+        "english": "Good morning",
+        "italian": "Buongiorno",
+        "ukrainian": "Доброго ранку",
+        "german": "Guten Morgen"
+      }
+    },
+    {
+      "slug": "good-night",
+      "translations": {
+        "english": "Good night",
+        "italian": "Buonanotte",
+        "ukrainian": "На добраніч",
+        "german": "Gute Nacht"
+      }
+    },
+    {
+      "slug": "how-are-you",
+      "translations": {
+        "english": "How are you?",
+        "italian": "Come stai?",
+        "ukrainian": "Як справи?",
+        "german": "Wie geht es dir?"
+      }
+    },
+    {
+      "slug": "i-love-you",
+      "translations": {
+        "english": "I love you",
+        "italian": "Ti amo",
+        "ukrainian": "Я тебе кохаю",
+        "german": "Ich liebe dich"
+      }
+    },
+    {
+      "slug": "cheers",
+      "translations": {
+        "english": "Cheers",
+        "italian": "Salute",
+        "ukrainian": "Будьмо",
+        "german": "Prost"
+      }
+    }
+  ]
+}
