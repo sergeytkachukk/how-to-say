@@ -1,3 +1,5 @@
+import { getVariant } from "./experiment";
+
 export type TrackParams = Record<string, string | number | boolean>;
 
 export type TrackedEvent = {
@@ -36,9 +38,10 @@ export function trackEvent(name: string, params: TrackParams = {}): void {
   if (typeof window === "undefined") return;
 
   window.dataLayer = window.dataLayer ?? [];
-  window.dataLayer.push({ event: name, ...params });
+  const allParams = { ...params, variant: getVariant() };
+  window.dataLayer.push({ event: name, ...allParams });
 
-  const event: TrackedEvent = { id: eventHistory.length + 1, name, params, at: Date.now() };
+  const event: TrackedEvent = { id: eventHistory.length + 1, name, params: allParams, at: Date.now() };
   eventHistory = [...eventHistory, event];
   window.dispatchEvent(new CustomEvent<TrackedEvent>(TRACK_EVENT_NAME, { detail: event }));
 }
