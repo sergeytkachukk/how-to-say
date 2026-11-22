@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import PageView from "@/components/PageView";
+import TrackedLink from "@/components/TrackedLink";
+import CopyButton from "@/components/CopyButton";
 import AudioPlayer from "@/components/AudioPlayer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
@@ -45,6 +47,7 @@ export default async function EnglishPhrasePage({ params }: Props) {
 
   const english = getText(phrase, "english");
   const pageUrl = getPhraseUrl(phrase, "english");
+  const eventParams = { phrase: phrase.slug, language: "english" };
 
   const audioJsonLd = {
     "@context": "https://schema.org",
@@ -58,6 +61,8 @@ export default async function EnglishPhrasePage({ params }: Props) {
 
   return (
     <>
+      <PageView params={{ page_type: "phrase", ...eventParams }} />
+
       <Breadcrumbs
         items={[
           { name: "Home", url: "/" },
@@ -65,32 +70,39 @@ export default async function EnglishPhrasePage({ params }: Props) {
           { name: english, url: pageUrl },
         ]}
       />
+
       <h1>How to say &quot;{english}&quot; in other languages</h1>
 
       <div className="phrase-card">
         <p className="big-phrase" lang="en">
           {english}
         </p>
-        <AudioPlayer src={getAudioPath(phrase, "english")} label={`Listen to ${english} in English`} />
+
+        <AudioPlayer src={getAudioPath(phrase, "english")} label={`Listen to ${english} in English`} params={eventParams} />
+
+        <CopyButton text={english} params={eventParams} />
       </div>
 
       <h2>{english} in other languages</h2>
+
       <ul className="phrase-list">
         {translationLanguages.map((language) => (
           <li key={language.slug}>
-            <Link href={getPhraseUrl(phrase, language.slug)}>
+            <TrackedLink href={getPhraseUrl(phrase, language.slug)} linkType="other_language">
               <span lang={language.code}>{getText(phrase, language.slug)}</span>
+
               <small>{language.name}</small>
-            </Link>
+            </TrackedLink>
           </li>
         ))}
       </ul>
 
       <h2>Related phrases</h2>
+
       <ul className="link-list">
         {getRelatedPhrases(phrase).map((related) => (
           <li key={related.slug}>
-            <Link href={getPhraseUrl(related, "english")}>{getText(related, "english")}</Link>
+            <TrackedLink href={getPhraseUrl(related, "english")} linkType="related_phrase">{getText(related, "english")}</TrackedLink>
           </li>
         ))}
       </ul>

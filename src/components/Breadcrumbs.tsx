@@ -25,6 +25,7 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
           </li>
         ))}
       </ol>
+
       <JsonLd data={jsonLd} />
     </nav>
   );

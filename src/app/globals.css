@@ -195,3 +195,59 @@ a:focus-visible {
     padding: 24px;
   }
 }
+
+.phrase-card .copy-button {
+  margin-top: -8px;
+}
+
+.copy-button {
+  font: inherit;
+  font-size: 0.875rem;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--foreground);
+  background: var(--background);
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  background: var(--surface);
+}
+
+.event-log {
+  margin-top: 56px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.event-log h2 {
+  margin: 0 0 4px;
+}
+
+.event-log-note {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.event-log ul {
+  margin-top: 12px;
+  list-style: none;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8125rem;
+}
+
+.event-log li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
+}
+
+.event-log time,
+.event-log span {
+  color: var(--muted);
+}
