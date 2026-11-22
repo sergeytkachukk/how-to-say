@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "audio": "node --env-file=.env.local scripts/generate-audio.ts",
+    "audio:run": "node --env-file=.env.local scripts/generate-audio.ts --run"
   },
   "dependencies": {
     "next": "16.4.6",
