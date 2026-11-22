@@ -1,0 +1,10 @@
+// Puts structured data (JSON-LD) in the page for search engines.
+// The "<" is replaced so the text can never close the script tag.
+export default function JsonLd({ data }: { data: object }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+    />
+  );
+}
