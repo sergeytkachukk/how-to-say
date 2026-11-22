@@ -26,7 +26,6 @@ type Data = {
 const isRealRun = process.argv.includes("--run");
 const data: Data = JSON.parse(readFileSync(DATA_FILE, "utf-8"));
 
-// Build the list of files we need.
 const jobs = data.phrases.flatMap((phrase) =>
   data.languages.map((language) => ({
     fileName: `${phrase.slug}-${language.slug}.mp3`,

@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-// next/font loads the font at build time and serves it from our own site.
 const inter = Inter({ subsets: ["latin", "cyrillic"], display: "swap" });
 
 export const metadata: Metadata = {
@@ -21,9 +20,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={inter.className}>
       <body>
         <header className="site-header">
-          <Link href="/" className="site-name">
-            {SITE_NAME}
-          </Link>
+          <div className="site-header-inner">
+            <Link href="/" className="site-name">
+              {SITE_NAME}
+            </Link>
+          </div>
         </header>
         <main>{children}</main>
         <footer className="site-footer">A demo site. Audio made with ElevenLabs.</footer>

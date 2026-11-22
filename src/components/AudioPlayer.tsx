@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 
-// A play button for one mp3 file. The file is static, so no API call is made.
 export default function AudioPlayer({ src, label }: { src: string; label: string }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);

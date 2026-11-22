@@ -6,7 +6,6 @@ import { getLanguage, getPhraseUrl, getText, languages, phrases } from "@/lib/ph
 
 type Props = { params: Promise<{ language: string }> };
 
-// Only these languages exist. Any other address shows the 404 page.
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -45,7 +44,7 @@ export default async function LanguagePage({ params }: Props) {
           <li key={phrase.slug}>
             <Link href={getPhraseUrl(phrase, language.slug)}>
               <span lang={language.code}>{getText(phrase, language.slug)}</span>
-              <small>{getText(phrase, "english")}</small>
+              {language.slug !== "english" && <small>{getText(phrase, "english")}</small>}
             </Link>
           </li>
         ))}

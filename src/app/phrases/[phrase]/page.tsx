@@ -67,10 +67,12 @@ export default async function EnglishPhrasePage({ params }: Props) {
       />
       <h1>How to say &quot;{english}&quot; in other languages</h1>
 
-      <p className="big-phrase" lang="en">
-        {english}
-      </p>
-      <AudioPlayer src={getAudioPath(phrase, "english")} label={`Listen to ${english} in English`} />
+      <div className="phrase-card">
+        <p className="big-phrase" lang="en">
+          {english}
+        </p>
+        <AudioPlayer src={getAudioPath(phrase, "english")} label={`Listen to ${english} in English`} />
+      </div>
 
       <h2>{english} in other languages</h2>
       <ul className="phrase-list">

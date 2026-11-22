@@ -4,7 +4,6 @@ import { SITE_URL } from "@/lib/site";
 
 export type Crumb = { name: string; url: string };
 
-// Shows the path to the page and adds BreadcrumbList structured data.
 export default function Breadcrumbs({ items }: { items: Crumb[] }) {
   const jsonLd = {
     "@context": "https://schema.org",

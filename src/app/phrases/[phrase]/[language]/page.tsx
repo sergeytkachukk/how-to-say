@@ -22,7 +22,6 @@ type Props = { params: Promise<{ phrase: string; language: string }> };
 // Only phrases from data/phrases.json exist. Any other address shows the 404 page.
 export const dynamicParams = false;
 
-// 10 phrases x 3 translation languages = 30 pages made at build time.
 export function generateStaticParams() {
   return phrases.flatMap((phrase) =>
     translationLanguages.map((language) => ({ phrase: phrase.slug, language: language.slug })),
@@ -80,10 +79,12 @@ export default async function TranslationPage({ params }: Props) {
         How to say &quot;{english}&quot; in {language.name}
       </h1>
 
-      <p className="big-phrase" lang={language.code}>
-        {text}
-      </p>
-      <AudioPlayer src={getAudioPath(phrase, language.slug)} label={`Listen to ${english} in ${language.name}`} />
+      <div className="phrase-card">
+        <p className="big-phrase" lang={language.code}>
+          {text}
+        </p>
+        <AudioPlayer src={getAudioPath(phrase, language.slug)} label={`Listen to ${english} in ${language.name}`} />
+      </div>
 
       <h2>{english} in other languages</h2>
       <ul className="phrase-list">
