@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { trackEvent, type TrackParams } from "@/lib/track";
 
-export default function AudioPlayer({ src, label }: { src: string; label: string }) {
+export default function AudioPlayer({ src, label, params }: { src: string; label: string; params: TrackParams }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -11,6 +12,7 @@ export default function AudioPlayer({ src, label }: { src: string; label: string
     if (!audio) return;
     audio.currentTime = 0;
     audio.play();
+    trackEvent("play_audio", params);
   }
 
   return (
@@ -18,6 +20,7 @@ export default function AudioPlayer({ src, label }: { src: string; label: string
       <button type="button" className="play-button" onClick={play} aria-label={label}>
         {isPlaying ? "Playing..." : "▶ Listen"}
       </button>
+
       <audio
         ref={audioRef}
         src={src}

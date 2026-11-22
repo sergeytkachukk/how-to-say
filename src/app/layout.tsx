@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Inter } from "next/font/google";
+import EventLog from "@/components/EventLog";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -26,7 +27,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </Link>
           </div>
         </header>
-        <main>{children}</main>
+
+        <main>
+          {children}
+
+          <EventLog />
+        </main>
+
         <footer className="site-footer">A demo site. Audio made with ElevenLabs.</footer>
       </body>
     </html>

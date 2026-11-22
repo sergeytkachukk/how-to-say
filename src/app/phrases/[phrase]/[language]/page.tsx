@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import PageView from "@/components/PageView";
+import TrackedLink from "@/components/TrackedLink";
+import CopyButton from "@/components/CopyButton";
 import AudioPlayer from "@/components/AudioPlayer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
@@ -24,7 +26,10 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   return phrases.flatMap((phrase) =>
-    translationLanguages.map((language) => ({ phrase: phrase.slug, language: language.slug })),
+    translationLanguages.map((language) => ({
+      phrase: phrase.slug,
+      language: language.slug,
+    })),
   );
 }
 
@@ -54,7 +59,10 @@ export default async function TranslationPage({ params }: Props) {
   const english = getText(phrase, "english");
   const text = getText(phrase, language.slug);
   const pageUrl = getPhraseUrl(phrase, language.slug);
-  const otherLanguages = languages.filter((item) => item.slug !== language.slug);
+  const eventParams = { phrase: phrase.slug, language: language.slug };
+  const otherLanguages = languages.filter(
+    (item) => item.slug !== language.slug,
+  );
 
   const audioJsonLd = {
     "@context": "https://schema.org",
@@ -68,6 +76,8 @@ export default async function TranslationPage({ params }: Props) {
 
   return (
     <>
+      <PageView params={{ page_type: "phrase", ...eventParams }} />
+
       <Breadcrumbs
         items={[
           { name: "Home", url: "/" },
@@ -75,6 +85,7 @@ export default async function TranslationPage({ params }: Props) {
           { name: english, url: pageUrl },
         ]}
       />
+
       <h1>
         How to say &quot;{english}&quot; in {language.name}
       </h1>
@@ -83,35 +94,56 @@ export default async function TranslationPage({ params }: Props) {
         <p className="big-phrase" lang={language.code}>
           {text}
         </p>
-        <AudioPlayer src={getAudioPath(phrase, language.slug)} label={`Listen to ${english} in ${language.name}`} />
+
+        <AudioPlayer
+          src={getAudioPath(phrase, language.slug)}
+          label={`Listen to ${english} in ${language.name}`}
+          params={eventParams}
+        />
+
+        <CopyButton text={text} params={eventParams} />
       </div>
 
       <h2>{english} in other languages</h2>
+
       <ul className="phrase-list">
         {otherLanguages.map((item) => (
           <li key={item.slug}>
-            <Link href={getPhraseUrl(phrase, item.slug)}>
+            <TrackedLink
+              href={getPhraseUrl(phrase, item.slug)}
+              linkType="other_language"
+            >
               <span lang={item.code}>{getText(phrase, item.slug)}</span>
+
               <small>{item.name}</small>
-            </Link>
+            </TrackedLink>
           </li>
         ))}
       </ul>
 
       <h2>More phrases in {language.name}</h2>
+
       <ul className="phrase-list">
         {getRelatedPhrases(phrase).map((related) => (
           <li key={related.slug}>
-            <Link href={getPhraseUrl(related, language.slug)}>
-              <span lang={language.code}>{getText(related, language.slug)}</span>
+            <TrackedLink
+              href={getPhraseUrl(related, language.slug)}
+              linkType="related_phrase"
+            >
+              <span lang={language.code}>
+                {getText(related, language.slug)}
+              </span>
+
               <small>{getText(related, "english")}</small>
-            </Link>
+            </TrackedLink>
           </li>
         ))}
       </ul>
 
       <p>
-        <Link href={`/${language.slug}`}>See all phrases in {language.name}</Link>
+        <TrackedLink href={`/${language.slug}`} linkType="language_page">
+          See all phrases in {language.name}
+        </TrackedLink>
       </p>
 
       <JsonLd data={audioJsonLd} />

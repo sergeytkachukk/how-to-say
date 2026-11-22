@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import PageView from "@/components/PageView";
+import TrackedLink from "@/components/TrackedLink";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getLanguage, getPhraseUrl, getText, languages, phrases } from "@/lib/phrases";
 
@@ -31,21 +32,25 @@ export default async function LanguagePage({ params }: Props) {
 
   return (
     <>
+      <PageView params={{ page_type: "language", language: language.slug }} />
+
       <Breadcrumbs
         items={[
           { name: "Home", url: "/" },
           { name: language.name, url: `/${language.slug}` },
         ]}
       />
+
       <h1>Common phrases in {language.name}</h1>
 
       <ul className="phrase-list">
         {phrases.map((phrase) => (
           <li key={phrase.slug}>
-            <Link href={getPhraseUrl(phrase, language.slug)}>
+            <TrackedLink href={getPhraseUrl(phrase, language.slug)} linkType="language_list">
               <span lang={language.code}>{getText(phrase, language.slug)}</span>
+
               {language.slug !== "english" && <small>{getText(phrase, "english")}</small>}
-            </Link>
+            </TrackedLink>
           </li>
         ))}
       </ul>
