@@ -36,6 +36,12 @@ Next.js 16 (App Router), React 19 and TypeScript. All pages are generated at bui
 
 Every page has its own content. Phrase pages have a translation, audio and links. Language pages list real phrases. There are no empty pages and no copies, so there is nothing to hide from search engines. English has no translation page, because "thank you" in English is already the main phrase page.
 
+## Performance
+
+Lighthouse report for a phrase page, mobile.
+
+![Lighthouse report for a phrase page](docs/lighthouse.png)
+
 ## Tracking and A/B test
 
 Events are pushed to `window.dataLayer`.
