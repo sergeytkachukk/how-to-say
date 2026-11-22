@@ -1,4 +1,3 @@
-// Puts structured data (JSON-LD) in the page for search engines.
 // The "<" is replaced so the text can never close the script tag.
 export default function JsonLd({ data }: { data: object }) {
   return (
